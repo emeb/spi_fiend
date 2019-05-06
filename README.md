@@ -38,9 +38,14 @@ The board design is available in the 'hardware' directory. The Kicad PCB can
 be submitted directly to OSHpark.com, or traditional Gerbers can be exported
 using the application. Part values and packages are noted in the schematic.
 
+Note: in the Revision 1 PCB layout the USB connector doesn't overhang the PCB
+edge and there is a slight interference with the lower lip. Filing a slight
+chamfer on the PCB edge under the connector will allow it to sit flush to the
+board.
+
 ## Building Firmware
 
-Change to the 'firmware' director and run 'make' to build the binary file.
+Change to the 'firmware' directory and run 'make' to build the binary file.
 Once that builds without error, connect the hardware and push the 'boot'
 button, then push and release the 'rst' button to enter the manufacturer's
 USB DFU bootloader. Run 'make dfu' to load the firmware into the MCU and then
@@ -58,4 +63,8 @@ a guide to available options, but here's a quick list of common actions:
 * read SPI flash contents to a file: ./cdc_prog -a ADDRESS -l LENGTH -r > OUTPUT_FILE
 * erase SPI FLASH block: ./cdc_prog -a ADDRESS -e
 * read SPI Flash ID: ./cdc_prog -i
+
+In ordinary operation, the LED nearest the USB connector lights to indicate powerup,
+the center LED lights when an error is detected during operation and the outer LED
+lights when programming SPI flash.
 
