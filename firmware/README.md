@@ -19,5 +19,7 @@ binary file.
 ## Installing
 Connect the SPI Fiend hardware to your host USB and press both the `BOOT` and
 `RST` buttons to put it into DFU bootloader mode. Then run
-``make dfu
+```
+make dfu
+```
 to load the new firmware binary into the hardware.

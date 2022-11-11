@@ -45,11 +45,8 @@ board.
 
 ## Building Firmware
 
-Change to the 'firmware' directory and run 'make' to build the binary file.
-Once that builds without error, connect the hardware and push the 'boot'
-button, then push and release the 'rst' button to enter the manufacturer's
-USB DFU bootloader. Run 'make dfu' to load the firmware into the MCU and then
-hit the 'rst' button again to execute the new firmware.
+The [Firmware README](firmware/README.md) has instructions on building the
+preferred firmware for the SPI Fiend.
 
 ## Building Host Application
 
@@ -67,4 +64,11 @@ a guide to available options, but here's a quick list of common actions:
 In ordinary operation, the LED nearest the USB connector lights to indicate powerup,
 the center LED lights when an error is detected during operation and the outer LED
 lights when programming SPI flash.
+
+## Status
+### 2019-05-06
+Initial commit with hardware, firmware and host application
+
+### 2022-11-11
+Updated with dual firmware that supports FPGA, flash and UART
 
