@@ -2,26 +2,28 @@
 # 01-23-2019 E. Brombaugh
 
 # sub directories
-VPATH = .:CMSIS:HAL:USB
+VPATH = .:../CMSIS:../HAL:../common:../tinyusb/src:../tinyusb/src/class/cdc:\
+	../tinyusb/src/portable/st/stm32_fsdev:../tinyusb/src/common:\
+	../tinyusb/src/device
 
 # Object files
-OBJECTS =   startup_stm32f042x6.o system_stm32f0xx.o main.o cmd.o printf.o \
-			usart.o led.o spi.o tim.o \
-            usb.o usb_device.o usbd_desc.o usbd_conf.o usbd_cdc_if.o \
-			usbd_cdc.o usbd_core.o usbd_ctlreq.o usbd_ioreq.o \
+OBJECTS =   startup_stm32f042x6.o system_stm32f0xx.o main.o printf.o uart.o \
+			led.o tim.o spi.o cmd.o \
+			tusb.o usb_descriptors.o cdc_device.o usbd.o dcd_stm32_fsdev.o \
+			tusb_fifo.o usbd_control.o \
 			stm32f0xx_hal.o stm32f0xx_hal_cortex.o stm32f0xx_hal_rcc.o \
-			stm32f0xx_hal_rcc_ex.o stm32f0xx_hal_gpio.o stm32f0xx_hal_usart.o \
-			stm32f0xx_hal_spi.o stm32f0xx_hal_pcd.o stm32f0xx_hal_pcd_ex.o 
+			stm32f0xx_hal_rcc_ex.o stm32f0xx_hal_gpio.o stm32f0xx_hal_uart.o \
+			stm32f0xx_hal_uart_ex.o stm32f0xx_hal_spi.o 
 			
 # Linker script
 LDSCRIPT = STM32F042F6Px_FLASH.ld
 
 # Compiler Flags
 # Note -O3 breaks USB - use 0-2 or g for safety
-CFLAGS  = -O2 -g3 -ffunction-sections -std=gnu99 -Wall
-CFLAGS += -I. -ICMSIS -IHAL -IUSB
+CFLAGS  = -Os -ffunction-sections -std=gnu99 -Wall
+CFLAGS += -I. -I../CMSIS -I../HAL -I../common -I../tinyusb/src
 CFLAGS += -DARM_MATH_CM0 -DUSE_HAL_DRIVER
-CFLAGS += -DSTM32F042x6
+CFLAGS += -DSTM32F042x6  -DCFG_TUSB_MCU=OPT_MCU_STM32F0
 CFLAGS += -mcpu=cortex-m0 
 CFLAGS += -mlittle-endian -mthumb
 AFLAGS  = -mlittle-endian -mthumb -mcpu=cortex-m0
@@ -32,8 +34,8 @@ CPFLAGS = --output-target=binary
 ODFLAGS	= -x --syms
 
 # Executables
-#ARCH = arm-none-eabi
-ARCH = /opt/launchpad/gcc-arm-none-eabi-7-2018-q2-update/bin/arm-none-eabi
+ARCH = arm-none-eabi
+#ARCH = /opt/launchpad/gcc-arm-none-eabi-7-2018-q2-update/bin/arm-none-eabi
 CC = $(ARCH)-gcc
 LD = $(ARCH)-ld -v
 AS = $(ARCH)-as
@@ -56,7 +58,7 @@ clean:
 flash: oocd_flash
 
 oocd_flash: main.elf
-	$(OPENOCD) -f openocd_stlinkv2.1.cfg -c "program main.elf verify reset exit"
+	$(OPENOCD) -f openocd_stlink.cfg -c "program main.elf verify reset exit"
 
 gdb_flash: main.elf
 	$(GDB) -x flash_cmd.gdb -batch

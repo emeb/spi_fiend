@@ -37,9 +37,9 @@ void setup_usart(void)
 	HAL_GPIO_Init(GPIOA, &GPIO_InitStructure);
 
 	/* Configure USART Rx as alternate function push-pull */
-	//GPIO_InitStructure.Pin = GPIO_PIN_3;
-	//GPIO_InitStructure.Pull = GPIO_PULLUP;
-	//HAL_GPIO_Init(GPIOA, &GPIO_InitStructure);
+	GPIO_InitStructure.Pin = GPIO_PIN_3;
+	GPIO_InitStructure.Pull = GPIO_PULLUP;
+	HAL_GPIO_Init(GPIOA, &GPIO_InitStructure);
 
 	/* Setup USART */
 	__HAL_RCC_USART2_CLK_ENABLE();
@@ -69,5 +69,21 @@ void usart_putc(void* p, char c)
 	while(__HAL_USART_GET_FLAG(&UsartHandle, USART_FLAG_TC) == RESET)
 	{
 	}
-	USART2->TDR = c;
+	UsartHandle.Instance->TDR = c;
+}
+
+/*
+ * check if input ready
+ */
+uint32_t usart_available(void)
+{
+	return (__HAL_USART_GET_FLAG(&UsartHandle, USART_FLAG_RXNE) == SET) ? 1 : 0;
+}
+
+/*
+ * get input
+ */
+char usart_getc(void)
+{
+	return UsartHandle.Instance->RDR;
 }

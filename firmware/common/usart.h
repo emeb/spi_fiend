@@ -14,6 +14,8 @@ extern "C" {
 
 void setup_usart(void);
 void usart_putc(void* p, char c);
+uint32_t usart_available(void);
+char usart_getc(void);
 
 #ifdef __cplusplus
 }
