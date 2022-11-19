@@ -10,7 +10,9 @@ for serial UART I/O.
 ## Prerequisites
 The preferred dual firmware requires the TinyUSB repo. Please be sure to get
 that by executing the command
-``git submodule update --init
+```
+git submodule update --init
+```
 
 ## Building
 Go into the desired directory `dual` or `single` and run `make` to build the
