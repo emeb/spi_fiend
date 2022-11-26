@@ -43,6 +43,7 @@ OBJCPY = $(ARCH)-objcopy
 OBJDMP = $(ARCH)-objdump
 GDB = $(ARCH)-gdb
 OPENOCD = openocd
+DFU_SFX = dfu-suffix
 DFU = dfu-util
 
 CPFLAGS = --output-target=binary
@@ -52,7 +53,7 @@ ODFLAGS	= -x --syms
 all: main.bin
 
 clean:
-	-rm -f $(OBJECTS) crt.lst *.lst *.elf *.bin *.map *.dmp
+	-rm -f $(OBJECTS) crt.lst *.lst *.elf *.bin *.map *.dmp *.dfu
 
 #flash: gdb_flash
 flash: oocd_flash
@@ -64,17 +65,18 @@ gdb_flash: main.elf
 	$(GDB) -x flash_cmd.gdb -batch
 	stty sane
 
-dfu: main.bin
-	$(DFU) -a 0 -d 0483:df11 -s 0x8000000 -D main.bin
+dfu: main.dfu
+	$(DFU) -a 0 -s 0x8000000 -D main.dfu
 
 disassemble: main.elf
 	$(OBJDMP) -d main.elf > main.dis
 	
-dist:
-	tar -c *.h *.c *.s Makefile *.cmd *.cfg openocd_doflash | gzip > minimal_hello_world.tar.gz
-
 main.ihex: main.elf
 	$(OBJCPY) --output-target=ihex main.elf main.ihex
+
+main.dfu: main.bin
+	cp main.bin main.dfu
+	$(DFU_SFX) --vid 0483 --pid df11 --add main.dfu
 
 main.bin: main.elf 
 	$(OBJCPY) $(CPFLAGS) main.elf main.bin
