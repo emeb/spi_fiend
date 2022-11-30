@@ -828,10 +828,10 @@
       (net 14 "Net-(J1-PadS1)") (pinfunction "SHIELD") (pintype "passive") (tstamp 761df383-6c78-411e-a1bb-6a8f30e95bb9))
     (pad "S1" thru_hole oval (at 4.32 1.05 270) (size 1 1.6) (drill oval 0.6 1.2) (layers *.Cu *.Mask)
       (net 14 "Net-(J1-PadS1)") (pinfunction "SHIELD") (pintype "passive") (tstamp de9ef26b-7992-45cd-8747-801b94e11085))
-    (model "${KICAD6_3DMODEL_DIR}/Connector_USB.3dshapes/USB_C_Receptacle_HRO_TYPE-C-31-M-12.wrl"
-      (offset (xyz 0 0 0))
+    (model "/home/ericb/Engineering/KBADC/kicad/3Dmodels/TYPE-C-31-M-12--3DModel-STEP-56544.STEP"
+      (offset (xyz 0 -1 0))
       (scale (xyz 1 1 1))
-      (rotate (xyz 0 0 0))
+      (rotate (xyz -90 0 0))
     )
   )
 
@@ -1202,6 +1202,11 @@
       (net 1 "/NRST") (pinfunction "2") (pintype "passive") (tstamp 499ba088-4137-4dfb-b53a-55bffb4e6897))
     (pad "2" smd rect (at 2.25 1.075 90) (size 1 0.7) (layers "F.Cu" "F.Paste" "F.Mask")
       (net 1 "/NRST") (pinfunction "2") (pintype "passive") (tstamp 6de20eaa-d951-4d83-8052-b4aae5d6d7e2))
+    (model "${KICAD6_3DMODEL_DIR}/Button_Switch_SMD.3dshapes/SW_SPST_PTS645.wrl"
+      (offset (xyz 0 -0.05 0))
+      (scale (xyz 0.6 0.5 0.6))
+      (rotate (xyz 0 0 0))
+    )
   )
 
   (footprint "LED_SMD:LED_0603_1608Metric" (layer "F.Cu")
@@ -1422,6 +1427,11 @@
     (pad "28" smd roundrect (at -1.5 -1.875 90) (size 0.55 0.3) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0)
       (chamfer_ratio 0.5) (chamfer bottom_right)
       (net 34 "unconnected-(U1-Pad28)") (pinfunction "PB7") (pintype "bidirectional+no_connect") (zone_connect 0) (tstamp 7eac4dbd-7166-497e-94ba-dfe9e3d1613e))
+    (model "/home/ericb/Engineering/KBADC/kicad/3Dmodels/STM32F042G6U6.step"
+      (offset (xyz 0 0 0))
+      (scale (xyz 1 1 1))
+      (rotate (xyz -90 0 0))
+    )
   )
 
   (footprint "emeb_library:SW_SPST_PTS815" (layer "F.Cu")
@@ -1473,6 +1483,11 @@
       (net 29 "/BOOT0") (pinfunction "2") (pintype "passive") (tstamp 825ac98b-549f-417f-b876-30fe1ad161a6))
     (pad "2" smd rect (at -2.25 1.075 90) (size 1 0.7) (layers "F.Cu" "F.Paste" "F.Mask")
       (net 29 "/BOOT0") (pinfunction "2") (pintype "passive") (tstamp fbd86498-422f-4e1d-a0a4-2fbf578f66e0))
+    (model "${KICAD6_3DMODEL_DIR}/Button_Switch_SMD.3dshapes/SW_SPST_PTS645.wrl"
+      (offset (xyz 0 -0.05 0))
+      (scale (xyz 0.6 0.5 0.6))
+      (rotate (xyz 0 0 0))
+    )
   )
 
   (footprint "emeb_library:avatar_small" (layer "B.Cu")
